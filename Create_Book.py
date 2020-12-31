@@ -20,7 +20,7 @@ start_time = time.time()
 PdfFolder = os.getcwd() + '\\pdf'
 MusxFolder = os.getcwd() + '\\mus'
 IndexTemplate = os.getcwd() + '\\Index_Template.docx'
-OutputFile = os.getcwd() + '\\LibrettoCanti.pdf'
+OutputFile = os.getcwd() + '\\Libro_Spartiti.pdf'
 
 # List of .pdf and .musx Files
 PdfFiles = [x[:-4] for x in os.listdir(PdfFolder) if x.endswith('.pdf')]
