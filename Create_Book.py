@@ -3,7 +3,6 @@
 Created on Wed Apr  8 13:12:18 2020
 
 @author: StP
-
 Starting from .pdf files from a given folder and a template .docx file as
 index, create the song book.
 """
