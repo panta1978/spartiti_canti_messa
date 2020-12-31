@@ -26,7 +26,7 @@ PdfFiles = [x[:-4] for x in os.listdir(PdfFolder) if x.endswith('.pdf')]
 MusxFiles = [x[:-5] for x in os.listdir(MusxFolder) if x.endswith('.musx')]
 
 # Prepare sorted list of .pdf files (non-case sensitive alphabetical order with some characters removed or modified)
-PdfFiles_X = []; PdfFiles_X = PdfFiles[:]
+PdfFiles_X = PdfFiles[:]
 S_Find = np.array(['à', 'è', 'é', 'ì', 'ò', 'ù', '-', '\''])
 S_Repl = np.array(['a', 'e', 'e', 'i', 'o', 'u', ' ', ' ' ])
 for xfp in range(0, len(PdfFiles)):
