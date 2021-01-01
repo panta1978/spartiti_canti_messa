@@ -23,8 +23,23 @@ IndexTemplate = os.getcwd() + '\\Index_Template.docx'
 OutputFile = os.getcwd() + '\\Libro_Spartiti.pdf'
 
 # List of .pdf and .musx Files
-PdfFiles = [x[:-4] for x in os.listdir(PdfFolder) if x.endswith('.pdf')]
-MusxFiles = [x[:-5] for x in os.listdir(MusxFolder) if x.endswith('.musx')]
+PdfFiles = [x[:-4] for x in os.listdir(PdfFolder) if os.path.isfile(PdfFolder + '\\' + x) and x.endswith('.pdf')]
+MusxFiles = [x[:-5] for x in os.listdir(MusxFolder) if os.path.isfile(MusxFolder + '\\' + x) and x.endswith('.musx')]
+
+# Look for EXCEEDING .pdf Files (.musx counterpart not present)
+print('\n' + '=' * 32 + '\n')
+print('EXCEEDING PDF FILES:')
+for PdfFile in PdfFiles:
+    if not (PdfFile in MusxFiles):
+        print('* ' + PdfFile)
+print('\n' + '=' * 32 + '\n')
+
+# Look for MISSING .pdf Files (only .musx file present)
+print('MISSING PDF FILES:')
+for MusxFile in MusxFiles:
+    if not (MusxFile in PdfFiles):
+        print('* ' + MusxFile)
+print('\n' + '=' * 32 + '\n')
 
 # Prepare sorted list of .pdf files (non-case sensitive alphabetical order with some characters removed or modified)
 PdfFiles_X = PdfFiles[:]
@@ -43,21 +58,6 @@ NS = np.argsort(PdfFiles_X)
 # Sort .pdf files
 PdfFiles_S = [PdfFiles[n] for n in NS]
 PdfFiles_XS = [PdfFiles_X[n] for n in NS]
-
-# Look for EXCEEDING .pdf Files (.musx counterpart not present)
-print('\n' + '=' * 32 + '\n')
-print('EXCEEDING PDF FILES:')
-for PdfFile in PdfFiles_S:
-    if not (PdfFile in MusxFiles):
-        print('* ' + PdfFile)
-print('\n' + '=' * 32 + '\n')
-
-# Look for MISSING .pdf Files (only .musx file present)
-print('MISSING PDF FILES:')
-for MusxFile in MusxFiles:
-    if not (MusxFile in PdfFiles):
-        print('* ' + MusxFile)
-print('\n' + '=' * 32 + '\n')
 
 # Create Index string
 IdxStr = ''
