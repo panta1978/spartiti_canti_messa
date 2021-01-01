@@ -48,8 +48,8 @@ S_Repl = np.array(['a', 'e', 'e', 'i', 'o', 'u', ' ', ' '])
 for xfp in range(0, len(PdfFiles)):
     PdfFiles_X[xfp] = PdfFiles[xfp].lower()
     # Replace special characters with regular counterparts
-    for xs in range(0, len(S_Find)):
-        PdfFiles_X[xfp] = PdfFiles_X[xfp].replace(S_Find[xs], S_Repl[xs])
+    for (sf,sr) in zip(S_Find,S_Repl):
+        PdfFiles_X[xfp] = PdfFiles_X[xfp].replace(sf,sr)
     # Remove multiple spaces
     while PdfFiles_X[xfp].find('  ') >= 0:
         PdfFiles_X[xfp] = PdfFiles_X[xfp].replace('  ', ' ')
@@ -60,10 +60,7 @@ PdfFiles_S = [PdfFiles[n] for n in NS]
 PdfFiles_XS = [PdfFiles_X[n] for n in NS]
 
 # Create Index string
-IdxStr = ''
-for xfp in range(0, len(PdfFiles_S)):
-    IdxStr = IdxStr + PdfFiles_S[xfp] + '\n'
-IdxStr = IdxStr[:-1]
+IdxStr = '\n'.join(PdfFiles_S)
 
 # Create .docx temporary file with updated Song Index
 document = Document(IndexTemplate)
