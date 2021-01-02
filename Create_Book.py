@@ -90,8 +90,7 @@ else:
     AddBlankPageAfterIndex = 0
 
 # Calculate starting pages
-NPageStart = [];
-NPageStart.append(Np + 1)  # 1st file (except for index.pdf) starting page
+NPageStart = [Np + 1] # 1st file (except for index.pdf) starting page
 AddBlankPage = []  # Init Blank Page array. When 1, an extra blank page must be added
 for xfp in range(0, len(PdfFiles_S)):
     A = PdfFileReader(os.getcwd() + '\\pdf\\' + PdfFiles_S[xfp] + '.pdf')
@@ -133,12 +132,12 @@ for xfp in range(0, len(PdfFiles_XS)):
     output.addBookmark(PdfFiles_S[xfp], NPageStart[xfp] - 1 + AddBlankPage[xfp], parent)
 
 # Collapse Bookmarks
-output.addJS('function closeBookmarks(bm)' + \
-             '{var i; if (bm.children !== null)' + \
-             '{bm.open = false;' + \
-             'for (i = 0; i < bm.children.length; i += 1) ' + \
-             '{closeBookmarks(bm.children[i]);}}};' + \
-             'closeBookmarks(this.bookmarkRoot);' \
+output.addJS('function closeBookmarks(bm)' +
+             '{var i; if (bm.children !== null)' +
+             '{bm.open = false;' +
+             'for (i = 0; i < bm.children.length; i += 1) ' +
+             '{closeBookmarks(bm.children[i]);}}};' +
+             'closeBookmarks(this.bookmarkRoot);'
              )
 
 # Create output .pdf file
